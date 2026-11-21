@@ -1,0 +1,448 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Venue Reservation</title>
+
+  <style>
+    /* CSS: Styling the website */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f2f5f9;
+      color: #222;
+    }
+
+    header {
+      background-color: #24476b;
+      color: white;
+      text-align: center;
+      padding: 22px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    nav {
+      background-color: #18334e;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1050px;
+      margin: 25px auto;
+    }
+
+    h2 {
+      color: #24476b;
+      border-bottom: 2px solid #cbd8e5;
+      padding-bottom: 8px;
+    }
+
+    .venue-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .venue-card {
+      background: white;
+      padding: 16px;
+      border: 1px solid #d5dce5;
+      border-radius: 7px;
+    }
+
+    .venue-card h3 {
+      color: #24476b;
+      margin-top: 0;
+    }
+
+    .booking-box {
+      background: white;
+      padding: 18px;
+      border: 1px solid #d5dce5;
+      border-radius: 7px;
+      margin-top: 18px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 5px;
+    }
+
+    input, select, button {
+      padding: 9px;
+      font-size: 15px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+    }
+
+    input, select {
+      width: 100%;
+      max-width: 420px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #24476b;
+      color: white;
+      border: none;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #18334e;
+    }
+
+    .slot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .slot {
+      padding: 12px 8px;
+      text-align: center;
+      border-radius: 5px;
+      color: #222;
+      background: #d8f0dc;
+      border: 1px solid #8bc99a;
+      cursor: pointer;
+    }
+
+    .slot.pending {
+      background: #fff0c2;
+      border-color: #e4c15b;
+      cursor: not-allowed;
+    }
+
+    .slot.reserved {
+      background: #f5cccc;
+      border-color: #d98b8b;
+      cursor: not-allowed;
+    }
+
+    .slot.selected {
+      outline: 3px solid #24476b;
+      font-weight: bold;
+    }
+
+    .legend span {
+      display: inline-block;
+      margin: 5px 12px 5px 0;
+      font-size: 14px;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      margin-right: 5px;
+    }
+
+    #message {
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      background: #18334e;
+      color: white;
+      padding: 14px;
+      margin-top: 35px;
+    }
+
+    /* Responsive design for mobile */
+    @media (max-width: 600px) {
+      nav a {
+        display: inline-block;
+        margin: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header section -->
+  <header>
+    <h1>Campus Venue Reservation System</h1>
+    <p>Book college spaces for lectures, meetings and events</p>
+  </header>
+
+  <!-- Navigation bar -->
+  <nav>
+    <a href="#venues">Venue Directory</a>
+    <a href="#booking">Book a Venue</a>
+    <a href="#availability">Availability</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- Venue Directory -->
+    <section id="venues">
+      <h2>Our Venues</h2>
+
+      <div class="venue-list">
+
+        <div class="venue-card">
+          <h3>Auditorium</h3>
+          <p><b>Seating:</b> 300 people</p>
+          <p><b>Projector:</b> HD Projector</p>
+          <p><b>Mic System:</b> Available</p>
+          <p><b>AC:</b> Available</p>
+        </div>
+
+        <div class="venue-card">
+          <h3>Mini Seminar Hall</h3>
+          <p><b>Seating:</b> 80 people</p>
+          <p><b>Projector:</b> LCD Projector</p>
+          <p><b>Mic System:</b> Available</p>
+          <p><b>AC:</b> Available</p>
+        </div>
+
+        <div class="venue-card">
+          <h3>Smart Classroom</h3>
+          <p><b>Seating:</b> 60 people</p>
+          <p><b>Projector:</b> Smart Display</p>
+          <p><b>Mic System:</b> Not available</p>
+          <p><b>AC:</b> Available</p>
+        </div>
+
+        <div class="venue-card">
+          <h3>Conference Room</h3>
+          <p><b>Seating:</b> 20 people</p>
+          <p><b>Projector:</b> LED Display</p>
+          <p><b>Mic System:</b> Available</p>
+          <p><b>AC:</b> Available</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Booking Form -->
+    <section id="booking" class="booking-box">
+      <h2>Request a Booking</h2>
+
+      <label for="studentName">Your Name</label>
+      <input type="text" id="studentName"
+             placeholder="Enter your name">
+
+      <label for="venue">Select Venue</label>
+      <select id="venue">
+        <option value="Auditorium">Auditorium</option>
+        <option value="Mini Seminar Hall">Mini Seminar Hall</option>
+        <option value="Smart Classroom">Smart Classroom</option>
+        <option value="Conference Room">Conference Room</option>
+      </select>
+
+      <label for="bookingDate">Select Date</label>
+      <input type="date" id="bookingDate">
+
+      <label for="bookingTime">Select Time Slot</label>
+      <select id="bookingTime">
+        <option value="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
+        <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+        <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+        <option value="12:00 PM - 01:00 PM">12:00 PM - 01:00 PM</option>
+        <option value="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
+        <option value="03:00 PM - 04:00 PM">03:00 PM - 04:00 PM</option>
+      </select>
+
+      <label for="purpose">Purpose of Booking</label>
+      <input type="text" id="purpose"
+             placeholder="Example: Club meeting">
+
+      <br>
+
+      <button onclick="sendBooking()">
+        Submit Booking Request
+      </button>
+
+      <p id="message"></p>
+    </section>
+
+    <!-- Availability Section -->
+    <section id="availability" class="booking-box">
+      <h2>Venue Availability</h2>
+
+      <p>Select a venue and date above to view sample time-slot availability.</p>
+
+      <div class="legend">
+        <span>
+          <i class="dot" style="background:#d8f0dc"></i>
+          Available
+        </span>
+
+        <span>
+          <i class="dot" style="background:#fff0c2"></i>
+          Pending
+        </span>
+
+        <span>
+          <i class="dot" style="background:#f5cccc"></i>
+          Reserved
+        </span>
+      </div>
+
+      <div id="slotGrid" class="slot-grid"></div>
+    </section>
+
+    <!-- Booking Requests -->
+    <section class="booking-box">
+      <h2>Booking Requests (This Browser)</h2>
+
+      <p>
+        Requests submitted in this demo will appear below.
+        They are not sent to college administration.
+      </p>
+
+      <ul id="requestList">
+        <li>No requests submitted yet.</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Campus Venue Reservation System | Student Project</p>
+  </footer>
+
+  <!-- JavaScript Section -->
+  <script>
+
+    // List of time slots
+    const times = [
+      "09:00 AM - 10:00 AM",
+      "10:00 AM - 11:00 AM",
+      "11:00 AM - 12:00 PM",
+      "12:00 PM - 01:00 PM",
+      "02:00 PM - 03:00 PM",
+      "03:00 PM - 04:00 PM"
+    ];
+
+    // Sample booking statuses
+    const sampleStatus = [
+      "available",
+      "reserved",
+      "available",
+      "pending",
+      "available",
+      "reserved"
+    ];
+
+    // Function to display time slots
+    function showSlots() {
+
+      const grid = document.getElementById("slotGrid");
+
+      grid.innerHTML = "";
+
+      for (let i = 0; i < times.length; i++) {
+
+        const slot = document.createElement("div");
+
+        slot.className = "slot " + sampleStatus[i];
+
+        slot.textContent = times[i] + " - " + sampleStatus[i];
+
+        if (sampleStatus[i] === "available") {
+
+          slot.onclick = function() {
+
+            document.getElementById("bookingTime").value = times[i];
+
+            document.querySelectorAll(".slot").forEach(item => {
+              item.classList.remove("selected");
+            });
+
+            slot.classList.add("selected");
+          };
+        }
+
+        grid.appendChild(slot);
+      }
+    }
+
+    // Function to submit booking request
+    function sendBooking() {
+
+      const name = document.getElementById("studentName").value.trim();
+
+      const venue = document.getElementById("venue").value;
+
+      const date = document.getElementById("bookingDate").value;
+
+      const time = document.getElementById("bookingTime").value;
+
+      const purpose = document.getElementById("purpose").value.trim();
+
+      const message = document.getElementById("message");
+
+      // Check empty fields
+      if (name === "" || date === "" || purpose === "") {
+
+        message.style.color = "red";
+
+        message.textContent =
+          "Please fill in your name, date and purpose.";
+
+        return;
+      }
+
+      // Create a new list item
+      const item = document.createElement("li");
+
+      item.textContent = name + " requested " + venue + " on " + date +
+                         " at " + time + " for: " + purpose +
+                         " (Pending approval)";
+
+      document.getElementById("requestList").appendChild(item);
+
+      // Display confirmation message
+      message.style.color = "green";
+
+      message.textContent =
+        "Your demo booking request has been added!";
+
+      // Clear form fields
+      document.getElementById("studentName").value = "";
+
+      document.getElementById("purpose").value = "";
+    }
+
+    // Set today's date as minimum date
+    const dateInput = document.getElementById("bookingDate");
+
+    const today = new Date();
+
+    const dateText = today.getFullYear() + "-" +
+      String(today.getMonth() + 1).padStart(2, "0") + "-" +
+      String(today.getDate()).padStart(2, "0");
+
+    dateInput.min = dateText;
+
+    // Display time slots when page loads
+    showSlots();
+
+  </script>
+
+</body>
+</html>
